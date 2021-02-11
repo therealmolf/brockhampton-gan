@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>
+
+        </title>
+    </head>
+    <body>
+        <div>
+            <label for="fname">Upload Image Here: </label>
+            <input type="file">
+        </div>
+
+        {% for post in posts %}
+            <h1>{{ post.title}}</h1>
+            <p> By {{post.author}} on {{post.date_posted}}</p>
+            <h2>{{post.content}}</h2>
+            <br>
+            <br>
+        {% endfor %}
+    </body>
+</html>
