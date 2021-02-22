@@ -6,10 +6,38 @@
         </title>
     </head>
     <body>
-        <div>
-            <label for="fname">Upload Image Here: </label>
-            <input type="file">
-        </div>
+        {% block content %}
+        <form method='post' enctype='multipart/form-data' action="image">
+            {% csrf_token %}
+            <div>
+                <label for="fname">Upload Image Here: </label>
+                <input name='filepath' type="file">
+        
+            <br>
+
+                <input type="submit" value='Submit'>
+
+            <br>
+            </div>
+            <img src={{filepath_name}} alt="coolimage">
+            <br>
+            <br>
+            {{filepath_name}}
+        </form>
+
+        <br>
+
+        <form action="progan" method="post">
+            {% csrf_token %}
+            <button type="submit" name="btn1" value={{image_uri}}>Generate</button>
+            <br>
+            <img src={{image_uri}} alt="coolimage2">
+        </form>
+        
+        {% endblock %}
+
+   
+        
 
         {% for post in posts %}
             <h1>{{ post.title}}</h1>
