@@ -7,7 +7,7 @@ import numpy as np
 import PIL
 from io import BytesIO
 import base64
-from helpers import display_image, to_data_uri
+from inference.helpers import display_image, to_data_uri
 
 progan = hub.load("https://tfhub.dev/google/progan-128/1").signatures['default']
 
