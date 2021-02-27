@@ -8,6 +8,7 @@ import PIL
 from io import BytesIO
 import base64
 from inference.helpers import display_image, to_data_uri
+from inference.deep import create_model
 
 progan = hub.load("https://tfhub.dev/google/progan-128/1").signatures['default']
 
