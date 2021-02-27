@@ -6,7 +6,7 @@ from django.conf import settings
 urlpatterns = [
     path('', views.home, name='inference-home'),
     path('about', views.about, name='inference-about'),
-    path('image', views.generate_image, name='inference-generate'),
+    path('song', views.generate_image, name='inference-generate'),
     path('progan', views.progan_image, name='inference-progan')
 ]
 
