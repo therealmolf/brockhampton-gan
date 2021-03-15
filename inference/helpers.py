@@ -3,6 +3,8 @@ import PIL
 from io import BytesIO
 import base64
 import tensorflow as tf
+import librosa
+from pathlib import Path
 
 
 # probably best to move this to a separate pyfile
@@ -26,14 +28,16 @@ def display_image(image):
 
     
 def flattened_pca(mp3_filename):
-  '''
-    loads mp3 file, gets magnitude mel spectrogram, flattens mel and reduces dimensionality of particular mel
-    Returns a flattened numpy array that represents the mFcc
-  '''
-  y, sr = librosa.load(mp3_filename)
-  mel = librosa.feature.melspectrogram(y=y, sr=sr)
-  mel_db = librosa.power_to_db(mel, ref=np.max)
-  mel_db = mel_db.flatten()
-  mel_db = np.reshape(mel_db, (1, -1))
+    '''
+      oads mp3 file, gets magnitude mel spectrogram, 
+      flattens mel and reduces dimensionality of particular mel
+      Returns a flattened numpy array that represents the mFcc
+    '''
+    mp3 = Path(mp3_filename)
+    y, sr = librosa.load(mp3)
+    mel = librosa.feature.melspectrogram(y=y, sr=sr)
+    mel_db = librosa.power_to_db(mel, ref=np.max)
+    mel_db = mel_db.flatten()
+    mel_db = np.reshape(mel_db, (1, -1))
 
-  return mel_db
+    return mel_db

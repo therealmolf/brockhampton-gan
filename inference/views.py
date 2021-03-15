@@ -7,8 +7,10 @@ import numpy as np
 import PIL
 from io import BytesIO
 import base64
-from inference.helpers import display_image, to_data_uri
+from inference.helpers import display_image, to_data_uri, flattened_pca
 from inference.deep import create_model
+import re
+
 
 progan = hub.load("https://tfhub.dev/google/progan-128/1").signatures['default']
 
@@ -37,11 +39,28 @@ def home(request):
 
 def generate_image(request):
     file_obj = request.FILES['filepath']
+    print(file_obj)
     fs = FileSystemStorage()
     filepath_name = fs.save(file_obj.name,file_obj)
     filepath_name = fs.url(filepath_name)
-    print(filepath_name)
-    context = {'filepath_name': filepath_name}
+    # hacky format thing I had to do
+    filepath_name = re.sub("%20", " ", filepath_name)
+    filepath_name = "/home/therealmolf/projects/gango" + filepath_name
+
+    # filepath_name = "/home/therealmolf/projects/gango/media/glaive - dnd (audio).mp3"
+
+
+    model = create_model()
+    
+    vector = flattened_pca(filepath_name)
+    output = model(vector)[0]
+    pil_img = display_image(output)
+    music_uri = to_data_uri(pil_img)
+
+    # print(filepath_name)
+
+    context = {'filepath_name': filepath_name,
+                'music_uri': music_uri}
     # print(request.POST)
     return render(request, 'inference/home.html', context)
 
