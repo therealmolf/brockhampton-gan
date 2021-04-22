@@ -69,9 +69,9 @@ def generate_image(request):
     ####################################
     t3 = time.perf_counter()
     print(f"flatten pca function took {t3-t2} seconds")
-    print(vector.shape)
+    # print(vector.shape)
 
-    vector = tf.random.normal([1, 100_000])
+    # vector = tf.random.normal([1, 100_000])
 
     # BOTTLENECK IS HERE
     ####################################
