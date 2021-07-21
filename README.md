@@ -1,2 +1,1 @@
-# Brockhampton GAN is a Django Web App wherein you can turn into a music video just like
-# th
+# Brockhampton GAN is an AI-powered web app for creating visuals using a GAN and a song input 
